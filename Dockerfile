@@ -27,7 +27,7 @@ ENTRYPOINT sh -c '\
   WHEEL_PATH=$(find /root/.cache/pip/wheels -name "xgboost*.whl" | head -n 1); \
   if [ -n "$WHEEL_PATH" ]; then \
     VERSION=$(basename "$WHEEL_PATH" | cut -d"-" -f2); \
-    cp "$WHEEL_PATH" "/output/xgboost_${VERSION}_ha.whl"; \
+    cp "$WHEEL_PATH" "/output/xgboost-${VERSION}-py3-none-any.whl"; \
     echo "✅ Copiado com sucesso: xgboost_${VERSION}_ha.whl"; \
   else \
     echo "❌ Nenhum arquivo .whl encontrado"; \
