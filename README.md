@@ -20,3 +20,27 @@ PARA FUNCIONAMENTO:
 4) abra o prompt e execute: docker compose up --build
 
 Os arquivos .whl irão ser salvos na pasta output e depois precisam ser upados no github. A partir disso, com o link do git, instala no appdaemon a versao pre compilada
+
+------------
+
+
+system_packages:
+  - py3-numpy
+  - python3
+python_packages:
+  - tuya-connector-python
+  - kafka-python
+  - joblib==1.3.1
+init_commands:
+  - >-
+    pip install --no-cache-dir
+    https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/numpy-1.23.5-py3-none-any.whl
+  - >-
+    pip install --no-cache-dir
+    https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/pandas-2.1.4-py3-none-any.whl
+  - >-
+    pip install --no-cache-dir
+    https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/scikit_learn-1.2.2-py3-none-any.whl
+  - >-
+    pip install --no-cache-dir
+    https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/xgboost-1.7.6-py3-none-any.whl
