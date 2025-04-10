@@ -1,0 +1,5 @@
+services:
+  whl-builder:
+    build: .
+    volumes:
+      - ./output:/output
