@@ -1,5 +1,7 @@
 # whl_do_xgboos_HA
-Com a impossibilidade de instalar as dependencia necessarias para a execução do XGBOOST no ambiente do HA devido a limitações do homeassistant que roda muls r4 (versão essa exigida para executar o core no HA) e o xgboost precisa de R5. No HA não é possível atualizar o musl para versão mais atual o que impossibilita sua execução nesse ambiente. essa solução contorna essa limitação compilando todas as dependencias do XGBOOST em um ambiente externo e cria um .WHL (versão pré-compilada) que só é carregada e executada no HA.  
+Com a impossibilidade de instalar as dependencia necessarias para a execução do XGBOOST no ambiente do HA devido a limitações do homeassistant que roda muls r4 (versão essa exigida para executar o core no HA) e o xgboost precisa de R5. No HA não é possível atualizar o musl para versão mais atual (R5 - o que danificaria a execução do CORE e do SO do HA), logo, tão limitação  impossibilita a execução do XGBOOST nesse ambiente. 
+
+A solução proposta contorna essa limitação, pois compila todas as dependencias do XGBOOST em um ambiente externo que permite R5 e cria um .WHL (versão pré-compilada) carregada no homeassist que executa musl R4 normalmente.  
 
 --------------------
 PARA FUNCIONAMENTO, necessita apenas:
@@ -9,7 +11,7 @@ PARA FUNCIONAMENTO, necessita apenas:
 3) cole os arquivos docker-compose.yml e Dockerfile dentro da pasta xgboost
 4) abra o prompt e execute: docker compose up --build
 
-Os arquivos .whl irão ser salvos na pasta output (versão mais atual - atualmente, 3.0.0)
+Os arquivos .whl irão ser salvos na pasta output (versão 1.7.6 - a versão 3.0.0, atual, apresenta problemas no pacote CUDA que não é reconhecido no Alpine)
 Após o salvamento do arquivo (que já virá na nomeclatura correta - padrão PEP 427) - apenas suba o arquivo whl para o github [PUBLICO]
 
 ------------
@@ -29,7 +31,7 @@ A configuração do appdeamon será:
     init_commands:
       - >-
         pip install --no-cache-dir
-        https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/xgboost-3.0.0-py3-none-any.whl
+        https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/xgboost-1.7.6-py3-none-any.whl
 
 ----------
 
