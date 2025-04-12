@@ -16,7 +16,6 @@ Após o salvamento do arquivo (que já virá na nomeclatura correta - padrão PE
 
 A configuração do appdeamon será: 
 
-
     system_packages:
       - py3-numpy
       - python3
@@ -36,38 +35,72 @@ A configuração do appdeamon será:
 
 Um codigo que testa se tudo está rodando perfeitamente no appdaemon será: 
 
-class TestandoInstalacao(hass.Hass):
-
-    def initialize(self):
-        # Teste do NumPy
-        self.log(f"NumPy funcionando! Versao: {np.__version__}")
-        arr = np.array([[1, 2], [3, 4]])
-        self.log(f"Soma de array {arr} = {np.sum(arr)}")
-
-        # Teste do XGBoost
-        self.log(f"XGBoost funcionando! Versao: {xgb.__version__}")
-        dtrain = xgb.DMatrix([[1, 2], [3, 4]], label=[0, 1])
-        self.log(f"Linhas no DMatrix: {dtrain.num_row()}")
-
-        # Teste do Pandas
-        self.log(f"Pandas funcionando! Versao: {pd.__version__}")
-        df = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [5, 7, 9]})
-        self.log(f"DataFrame criado: \n{df}")
-
-        # Teste do scikit-learn
-        self.log(f"scikit-learn funcionando! Versao: {sklearn_version}")
-        
-        # Exemplo simples de classificação com scikit-learn
-        iris = load_iris()
-        X = iris.data
-        y = iris.target
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-        
-        clf = RandomForestClassifier(n_estimators=100, random_state=42)
-        clf.fit(X_train, y_train)
-        y_pred = clf.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred)
-        self.log(f"Acuracia do modelo: {accuracy:.4f}")
+    import appdaemon.plugins.hass.hassapi as hass
+    import numpy as np
+    import pandas as pd
+    import xgboost as xgb
+    from sklearn import __version__ as sklearn_version
+    from sklearn.datasets import load_iris
+    from sklearn.model_selection import train_test_split
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.metrics import accuracy_score
+    import kafka, joblib, tuya_connector, sys
+    
+    class TestandoInstalacao(hass.Hass):
+    
+        def initialize(self):
+    
+            # Teste da versão do Python
+            python_versao = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
+            self.log(f"Versão do Python instalada: {python_versao}")
+    
+            # Teste do Joblib
+            modelo = {"modelo": "teste"}
+            joblib.dump(modelo, "/tmp/modelo.joblib")
+            carregado = joblib.load("/tmp/modelo.joblib")
+            self.log(f"Joblib funcionando! Modelo: {carregado}, Versão: {joblib.__version__}")
+    
+            # Teste do Kafka
+            versao = kafka.__version__
+            self.log(f"Kafka-python funcionando! Versão: {versao}")
+    
+            # Teste TuyaConnector
+            try:
+                # Não conecta, só testa se pode instanciar a classe
+                dummy = tuya_connector.TuyaOpenAPI("https://openapi.tuyaus.com", "client_id", "client_secret")
+                self.log("Tuya Connector funcionando! Classe TuyaOpenAPI importada com sucesso.")
+            except Exception as e:
+                self.log(f"Erro ao testar Tuya Connector: {e}")
+    
+            # Teste do NumPy
+            self.log(f"NumPy funcionando! Versao: {np.__version__}")
+            arr = np.array([[1, 2], [3, 4]])
+            self.log(f"Soma de array {arr} = {np.sum(arr)}")
+    
+            # Teste do XGBoost
+            self.log(f"XGBoost funcionando! Versao: {xgb.__version__}")
+            dtrain = xgb.DMatrix([[1, 2], [3, 4]], label=[0, 1])
+            self.log(f"Linhas no DMatrix: {dtrain.num_row()}")
+    
+            # Teste do Pandas
+            self.log(f"Pandas funcionando! Versao: {pd.__version__}")
+            df = pd.DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [5, 7, 9]})
+            self.log(f"DataFrame criado: \n{df}")
+    
+            # Teste do scikit-learn
+            self.log(f"scikit-learn funcionando! Versao: {sklearn_version}")
+            
+            # Exemplo simples de classificação com scikit-learn
+            iris = load_iris()
+            X = iris.data
+            y = iris.target
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+            
+            clf = RandomForestClassifier(n_estimators=100, random_state=42)
+            clf.fit(X_train, y_train)
+            y_pred = clf.predict(X_test)
+            accuracy = accuracy_score(y_test, y_pred)
+            self.log(f"Acuracia do modelo: {accuracy:.4f}")
   
 apps.yaml
 
