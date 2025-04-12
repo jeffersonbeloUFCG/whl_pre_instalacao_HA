@@ -25,8 +25,11 @@ Os arquivos .whl irão ser salvos na pasta output e depois precisam ser upados n
 
 
 system_packages:
-  - py3-numpy
+  - py3-numpy #pode ser instalado assim
   - python3
+  - libgomp
+  - py3-scikit-learn #descobri que pode ser instalado assim
+  - py3-pandas # pandas nao é nessario
 python_packages:
   - tuya-connector-python
   - kafka-python
@@ -34,13 +37,6 @@ python_packages:
 init_commands:
   - >-
     pip install --no-cache-dir
-    https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/numpy-1.23.5-py3-none-any.whl
-  - >-
-    pip install --no-cache-dir
-    https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/pandas-2.1.4-py3-none-any.whl
-  - >-
-    pip install --no-cache-dir
-    https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/scikit_learn-1.2.2-py3-none-any.whl
-  - >-
-    pip install --no-cache-dir
     https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/xgboost-1.7.6-py3-none-any.whl
+
+Logo, so precisa do xgboost
