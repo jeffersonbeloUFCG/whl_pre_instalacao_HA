@@ -1,8 +1,0 @@
-services:
-  xgboost-builder:
-    image: xgboost-whl-builder_ha
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./output:/output
