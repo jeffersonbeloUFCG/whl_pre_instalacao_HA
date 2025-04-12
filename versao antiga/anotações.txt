@@ -1,6 +1,0 @@
-1 - crie uma pasta "Desktop/xgboost - diretório" e dentro dessa pasta uma subpasta "output"
-
-2 - Dentro da pasta xgboost - diretório cole o Dockerfile
-
-3 - acesse: cd Desktop e a pasta criada e então execute o comando para construir a imagem: 
-docker build -t xgboost-whl-builder .
