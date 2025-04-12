@@ -37,34 +37,23 @@ A configuração do appdeamon será:
 
 Um codigo que testa se tudo está rodando perfeitamente no appdaemon será: 
 
-    import appdaemon.plugins.hass.hassapi as hass
-    import numpy as np
-    import pandas as pd
-    import xgboost as xgb
-    from sklearn import __version__ as sklearn_version
-    from sklearn.datasets import load_iris
-    from sklearn.model_selection import train_test_split
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.metrics import accuracy_score
-    import kafka, joblib, tuya_connector, sys
-    
     class TestandoInstalacao(hass.Hass):
     
         def initialize(self):
     
             # Teste da versão do Python
             python_versao = f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}"
-            self.log(f"Versão do Python instalada: {python_versao}")
+            self.log(f"Versao do Python instalada: {python_versao}")
     
             # Teste do Joblib
             modelo = {"modelo": "teste"}
             joblib.dump(modelo, "/tmp/modelo.joblib")
             carregado = joblib.load("/tmp/modelo.joblib")
-            self.log(f"Joblib funcionando! Modelo: {carregado}, Versão: {joblib.__version__}")
+            self.log(f"Joblib funcionando! Modelo: {carregado}, Versao: {joblib.__version__}")
     
             # Teste do Kafka
             versao = kafka.__version__
-            self.log(f"Kafka-python funcionando! Versão: {versao}")
+            self.log(f"Kafka-python funcionando! Versao: {versao}")
     
             # Teste TuyaConnector
             try:
