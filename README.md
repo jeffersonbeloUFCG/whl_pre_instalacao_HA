@@ -70,6 +70,7 @@ class TestandoInstalacao(hass.Hass):
         self.log(f"Acuracia do modelo: {accuracy:.4f}")
   
 apps.yaml
-testando_instalacao:
-  module: testando_instalacao
-  class: TestandoInstalacao
+
+        testando_instalacao:
+          module: testando_instalacao
+          class: TestandoInstalacao
