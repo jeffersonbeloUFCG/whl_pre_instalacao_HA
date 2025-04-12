@@ -29,7 +29,7 @@ A configuração do appdeamon será:
     init_commands:
       - >-
         pip install --no-cache-dir
-        https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/xgboost_3.0.0-py3-none-any.whl
+        https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/xgboost-3.0.0-py3-none-any.whl
 
 ----------
 
