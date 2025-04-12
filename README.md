@@ -17,20 +17,20 @@ Após o salvamento do arquivo (que já virá na nomeclatura correta - padrão PE
 A configuração do appdeamon será: 
 
 
-system_packages:
-  - py3-numpy
-  - python3
-  - libgomp
-  - py3-scikit-learn
-  - py3-pandas
-python_packages:
-  - tuya-connector-python
-  - kafka-python
-  - joblib==1.3.1
-init_commands:
-  - >-
-    pip install --no-cache-dir
-    https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/xgboost_3.0.0-py3-none-any.whl
+    system_packages:
+      - py3-numpy
+      - python3
+      - libgomp
+      - py3-scikit-learn
+      - py3-pandas
+    python_packages:
+      - tuya-connector-python
+      - kafka-python
+      - joblib==1.3.1
+    init_commands:
+      - >-
+        pip install --no-cache-dir
+        https://github.com/jeffersonbeloUFCG/whl_pre_instalacao_HA/raw/main/xgboost_3.0.0-py3-none-any.whl
 
 ----------
 
